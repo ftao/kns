@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd"> 
+<html> 
+<head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+  <title>{{ knowledge.question }} - zhishi.me</title> 
+  <link rel="stylesheet" href="{{MEDIA_URL}}css/main.css" type="text/css" media="screen" charset="utf-8">    
+</head> 
+<body> 
+  <div id="header"> 
+      zhishi.me 个人知识分享平台
+  </div> 
+  <div id="wrap" class="group"> 
+    {% block content %}
+    <div class="stage"> 
+      <h1 class="k-question">{{ knowledge.question }}</h1>
+      {% if knowledge.answer_summary %}
+      <div class="k-answer-summary">
+        <h2>回答:</h2>
+        <p>
+        {{ knowledge.answer_summary }}
+        </p>
+      <div>
+      {% endif %}
+      <div class="k-answer-link">
+        <h2>有用的链接:<h2>
+        <p>
+          <a href="{{ knowledge.answer_page_url}}">{{ knowledge.answer_page_title}}</a>
+        </p>
+      </div>
+    </div> 
+    <div class="pane"> 
+      <div class="contents"> 
+        <div class="profile group"> 
+          <div> 
+              <p class="username">该知识由 {{ knowledge.user.username }} 提供</p> 
+          </div> 
+        </div> 
+      </div> 
+    </div> 
+    {% endblock %}
+  </div> <!-- end of wrap -->
+</body> 
+</html>

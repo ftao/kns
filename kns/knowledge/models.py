@@ -10,3 +10,12 @@ class Knowledge(models.Model):
     tags = models.CharField(max_length = 500, blank = True)
     created_datetime = models.DateTimeField(auto_now_add = True)
 
+
+    def __unicode__(self):
+        return self.question
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('knowledge_detail', (), {
+            'object_id': self.id
+        })

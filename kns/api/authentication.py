@@ -26,12 +26,12 @@ class APITokenAuthentication(object):
             token = request.GET.get('api_token', None)
         if token is None:
             token = request.POST.get('api_token', None)
+        print 'token', token
         try:
             api_token = APIToken.objects.get(token = token)
             request.user = api_token.user
         except APIToken.DoesNotExist:
             return False
-            
         return not request.user in (False, None, AnonymousUser())
         
     def challenge(self):

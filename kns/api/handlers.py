@@ -3,6 +3,7 @@ from piston.handler import BaseHandler
 from piston.utils import rc
 from kns.knowledge.models import Knowledge
 from django.conf import settings
+from django.contrib.sites.models import Site
 
 class KnowledgeHandler(BaseHandler):
     allowed_methods = ('POST',)
@@ -10,6 +11,7 @@ class KnowledgeHandler(BaseHandler):
     fields = ('id', 'question',
               'answer_summary','answer_page_title', 'answer_page_link',
               'tags', 'created_datetime',
+              'permlink',
               ('user', ('username',)))
 
     def create(self, request):
@@ -32,3 +34,7 @@ class KnowledgeHandler(BaseHandler):
                             user=request.user)
             kn.save()
             return kn
+
+    @classmethod
+    def permlink(cls, knowledge):
+        return  u'http://%s%s' %(Site.objects.get_current().domain, knowledge.get_absolute_url())
