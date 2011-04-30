@@ -3,7 +3,40 @@ from piston.handler import BaseHandler
 from piston.utils import rc
 from kns.knowledge.models import Knowledge
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from kns.api.models import APIToken
+
+class UserHandler(BaseHandler):
+    allowed_methods = ('POST',)
+    model = User
+    fields = ('username', 'api_token')
+
+    anonymous = True
+
+    def create(self, request):
+        """
+        Creates a new knowledge entry.
+        """
+        if not hasattr(request, "data"):
+            request.data = request.POST
+        attrs = self.flatten_dict(request.data)
+
+        username = attrs['username']
+        email = attrs['email']
+        same_name_count = User.objects.filter(username = username).count()
+        if same_name_count:
+            return RC.DUPLICATE_ENTRY
+        same_email_count = User.objects.filter(email = email).count()
+        if same_email_count:
+            return RC.DUPLICATE_ENTRY
+        user = User(username = username, email = email)
+        user.save()
+        return user
+
+    @classmethod
+    def api_token(cls, user):
+        return APIToken.objects.get(user = user).token
 
 class KnowledgeHandler(BaseHandler):
     allowed_methods = ('POST',)

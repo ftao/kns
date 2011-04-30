@@ -7,13 +7,12 @@ from kns.api.models import APIToken
 from django.contrib.auth.models import User
 from django.http import HttpRequest
 from kns.api.authentication import APITokenAuthentication
+import simplejson as json
 
 class APITokenAuthenticationTest(TestCase):
 
     def setUp(self):
         self.user = User.objects.create(username = 'test', password = 'pass')
-        self.token = 'the-token'
-        APIToken.objects.create(token = self.token, user = self.user)
 
     def test_api_token(self):
         auth = APITokenAuthentication()
@@ -24,16 +23,17 @@ class APITokenAuthenticationTest(TestCase):
         request.POST = {}
         self.assertTrue(not auth.is_authenticated(request))
 
-        request.GET['api_token'] = 'the-token'
+        api_token = APIToken.get_user_token(self.user)
+        request.GET['api_token'] = api_token
         self.assertTrue(auth.is_authenticated(request))
 
         request.GET = {}
-        request.POST['api_token'] = 'the-token'
+        request.POST['api_token'] = api_token
         self.assertTrue(auth.is_authenticated(request))
 
         request.GET = {}
         request.POST = {}
-        request.META['X-API-TOKEN'] = 'the-token'
+        request.META['X-API-TOKEN'] = api_token
         self.assertTrue(auth.is_authenticated(request))
 
     def test_challenge(self):
@@ -45,9 +45,6 @@ class KnowledgeAPITest(TestCase):
 
     def setUp(self):
         self.user = User.objects.create(username = 'test', password = 'pass')
-        self.token = 'the-token'
-        APIToken.objects.create(token = self.token, user = self.user)
-
 
     def testNewKnowledge(self):
         client = Client()
@@ -60,9 +57,27 @@ class KnowledgeAPITest(TestCase):
         }
         response = client.post('/api/v1/knowledge/', data)
         self.assertEqual(response.status_code, 401)
-        data['api_token'] = self.token
+        data['api_token'] = APIToken.get_user_token(self.user)
         response = client.post('/api/v1/knowledge/', data)
         print response
         self.assertEqual(response.status_code, 200)
+
+
+class UserAPITest(TestCase):
+
+    def setUp(self):
+        pass
+
+    def testNewKnowledge(self):
+        client = Client()
+        data = {
+            'username' : 'test',
+            'email' : 'test@test.com',
+        }
+        response = client.post('/api/v1/user/', data)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(json.loads(response.content)['username'], 'test')
+        self.assertTrue(json.loads(response.content)['api_token'])
+        print response
 
 

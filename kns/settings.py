@@ -1,6 +1,6 @@
 # Django settings for kns project.
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -99,3 +99,8 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+try:
+    from local_settings import *
+except ImportError,e:
+    pass
