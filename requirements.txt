@@ -7,5 +7,8 @@ django-email-confirmation
 django-indexer
 django-paging
 django-sentry
+django-debug-toolbar
+django-gravatar
+south
 #fabric
 

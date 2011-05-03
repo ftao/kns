@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class Knowledge(models.Model):
     user = models.ForeignKey(User)
-    question = models.CharField(max_length = 1000)
+    question = models.CharField(max_length = 500)
     answer_page_link = models.URLField(max_length = 500, verify_exists = False)
     answer_page_title = models.CharField(max_length = 500)
     answer_summary = models.CharField(max_length = 2000, blank = True)
@@ -19,3 +19,6 @@ class Knowledge(models.Model):
         return ('knowledge_detail', (), {
             'object_id': self.id
         })
+
+    class Meta:
+        ordering = ['-created_datetime']

@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     (r'^$', direct_to_template, {'template': 'index.html'}),
     (r'^api/v1/', include('kns.api.urls')),
     (r'^', include('kns.knowledge.urls')),
+    (r'^', include('kns.profile.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),

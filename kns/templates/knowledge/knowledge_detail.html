@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load gravatar %}
 
 {% block title %} {{ knowledge.question }} {% endblock %}
 
 {% block content %}
-<div class="stage"> 
+<div class="column span-18"> 
   <h1 class="k-question">{{ knowledge.question }}</h1>
   {% if knowledge.answer_summary %}
   <div class="k-answer-summary">
@@ -12,7 +13,7 @@
     <p>
     {{ knowledge.answer_summary }}
     </p>
-  <div>
+  </div>
   {% endif %}
   <div class="k-answer-link">
     <h2>{% trans "Useful Link" %}:<h2>
@@ -22,17 +23,22 @@
   </div>
   <div class="k-tags">
     <h2>{% trans "Tags" %}:<h2>
-    <p>
-      {{ knowledge.tags }}
-    </p>
+    <div>{{ knowledge.tags }}</div>
   </div>
-
 </div> 
-<div class="pane"> 
+<div class="column last"> 
   <div class="contents"> 
     <div class="profile group"> 
-      <div> 
-          <p class="username">{% with knowledge.user.username as username %}{% blocktrans %}This knowledge is created by {{username}}{% endblocktrans %} {% endwith %}</p> 
+      <!--
+      <div class="gravatar">
+          <img src="{% gravatar_for_user knowledge.user %}"/>
+      </div>
+      -->
+      <div class="text"> 
+        {% with knowledge.user.username as username %}
+          {% url user_detail object_id=knowledge.user.pk as user_link %}
+          {% blocktrans %}This knowledge is created by <a href="{{user_link}}">{{username}}</a>{% endblocktrans %}
+        {% endwith %}
       </div> 
     </div> 
   </div> 

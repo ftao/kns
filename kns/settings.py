@@ -75,6 +75,7 @@ MIDDLEWARE_CLASSES = (
 #    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'kns.urls'
@@ -93,14 +94,20 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
 
-    'indexer',
+    'south',
+
+    #'indexer',
     'paging',
     'sentry',
     'sentry.client',
+
+    'debug_toolbar',
+    'gravatar',
  
     'emailconfirmation',
     'kns.knowledge',
     'kns.api',
+    'kns.profile',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -123,6 +130,8 @@ if SentryHandler not in map(lambda x: x.__class__, logger.handlers):
     logger = logging.getLogger('sentry.errors')
     logger.propagate = False
     logger.addHandler(logging.StreamHandler())
+
+INTERNAL_IPS = ('127.0.0.1', '192.168.254.100')
 
 try:
     from local_settings import *

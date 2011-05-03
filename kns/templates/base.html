@@ -5,13 +5,14 @@
 <head> 
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
   <title>{% block title %}{% trans "Personal Knowledge Management Platform" %}{% endblock %}</title>
+  <link rel="stylesheet" href="{{MEDIA_URL}}css/screen.css" type="text/css" media="screen" charset="utf-8">    
   <link rel="stylesheet" href="{{MEDIA_URL}}css/main.css" type="text/css" media="screen" charset="utf-8">    
 </head> 
 <body> 
-  <div id="header"> 
+  <div id="header" class="container"> 
       {% trans "Personal Knowledge Management Platform" %}
   </div> 
-  <div id="wrap" class="group"> 
+  <div id="wrap" class="container"> 
     {% block content %}
     {% endblock %}
   </div> <!-- end of wrap -->

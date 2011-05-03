@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+  {% with theuser.username as username %}
+    {% blocktrans %}User {{ username }}{% endblocktrans %}
+  {% endwith %}
+{% endblock %}
+
+{% block content %}
+<div class="user_info">
+  <dl>
+    <dt>Username:</dt>
+    <dd>{{ theuser.username }}</dd>
+  </dl>
+</div>
+<div class="user_knowledge">
+  <h3>Knowledges</h3>
+  <ul>
+    {% for knowledge in theuser.knowledge_set.all %}
+        <li><a href="{{ knowledge.get_absolute_url }}">{{knowledge.question}}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+  
+{% endblock %}

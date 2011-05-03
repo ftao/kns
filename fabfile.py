@@ -134,7 +134,9 @@ def migrate():
     require('path')
     with cd('%(path)s/releases/current/%(project_name)s/' %env):
         run('%(path)s/bin/python manage.py syncdb --noinput' %env)
-        #run('%(path)s/bin/python manage.py migrate --noinput' %env)
+        run('%(path)s/bin/python manage.py migrate api 0001 --fake --noinput' %env)
+        run('%(path)s/bin/python manage.py migrate knowledge 0001 --fake --noinput' %env)
+        run('%(path)s/bin/python manage.py migrate --noinput' %env)
 
    
 def restart_webserver():
