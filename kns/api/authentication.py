@@ -21,14 +21,10 @@ class APITokenAuthentication(object):
         pass
 
     def is_authenticated(self, request):
-        token = request.META.get('X-API-TOKEN', None)
-        if token is None:
-            token = request.GET.get('api_token', None)
-        if token is None:
-            token = request.POST.get('api_token', None)
-        print 'token', token
+        username = request.GET.get('username', request.POST.get('username', None))
+        token = request.GET.get('token', request.POST.get('token', None))
         try:
-            api_token = APIToken.objects.get(token = token)
+            api_token = APIToken.objects.get(token = token, user__username = username)
             request.user = api_token.user
         except APIToken.DoesNotExist:
             return False

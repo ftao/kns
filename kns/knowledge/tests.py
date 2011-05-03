@@ -20,4 +20,19 @@ class KnowledgeTest(TestCase):
         """
         client = Client()
         response = client.get('/k/%d.html' %self.knowledge.id)
+        self.assertEqual(response.status_code, 200)
         print response
+
+ 
+class HomeTest(TestCase):
+
+    def test_home(self):
+        """
+        """
+        client = Client()
+        response = client.get('/')
+        print response
+        self.assertEqual(response.status_code, 200)
+        print response
+
+

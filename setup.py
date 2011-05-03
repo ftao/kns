@@ -29,9 +29,12 @@ setup(name='kns',
       install_requires=[
             'Django',
             'Django-Piston',
+            'django-email-confirmation',
             ],
       tests_require=[
-            #'BeautifulSoup',
+            'Django',
+            'Django-Piston',
+            'django-email-confirmation',
             ],
       )
 

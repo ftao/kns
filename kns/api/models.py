@@ -5,7 +5,7 @@ from django.conf import settings
 
 class APIToken(models.Model):
     user = models.ForeignKey(User, unique = True)
-    token = models.CharField(max_length = 50, unique = True)
+    token = models.CharField(max_length = 50)
 
     def __unicode__(self):
         return u'<user=%s, token=%s>' %(self.user.username, self.token)

@@ -92,6 +92,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
+    'emailconfirmation',
     'kns.knowledge',
     'kns.api',
     # Uncomment the next line to enable the admin:
