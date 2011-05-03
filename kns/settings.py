@@ -92,6 +92,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
+
+    'indexer',
+    'paging',
+    'sentry',
+    'sentry.client',
+ 
     'emailconfirmation',
     'kns.knowledge',
     'kns.api',
@@ -102,6 +108,21 @@ INSTALLED_APPS = (
 )
 
 DEFAULT_FROM_EMAIL = 'k-service@ftao.org'
+
+EMAIL_CONFIRMATION_DAYS = 5
+
+import logging
+from sentry.client.handlers import SentryHandler
+
+logger = logging.getLogger()
+# ensure we havent already registered the handler
+if SentryHandler not in map(lambda x: x.__class__, logger.handlers):
+    logger.addHandler(SentryHandler())
+
+    # Add StreamHandler to sentry's default so you can catch missed exceptions
+    logger = logging.getLogger('sentry.errors')
+    logger.propagate = False
+    logger.addHandler(logging.StreamHandler())
 
 try:
     from local_settings import *
