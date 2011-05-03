@@ -101,6 +101,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
+DEFAULT_FROM_EMAIL = 'k-service@ftao.org'
+
 try:
     from local_settings import *
 except ImportError,e:

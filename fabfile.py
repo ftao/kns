@@ -64,7 +64,7 @@ def deploy():
 
     install_site()
     symlink_current_release()
-    #migrate()
+    migrate()
     #install_cron_job()
     restart_webserver()
 
@@ -134,7 +134,7 @@ def migrate():
     require('path')
     with cd('%(path)s/releases/current/%(project_name)s/' %env):
         run('%(path)s/bin/python manage.py syncdb --noinput' %env)
-        run('%(path)s/bin/python manage.py migrate --noinput' %env)
+        #run('%(path)s/bin/python manage.py migrate --noinput' %env)
 
    
 def restart_webserver():
