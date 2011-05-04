@@ -58,8 +58,51 @@ class KnowledgeAPITest(TestCase):
         data['token'] = APIToken.get_user_token(self.user)
         data['username'] = 'test'
         response = client.post('/api/v1/knowledge/', data)
-        print response
         self.assertEqual(response.status_code, 200)
+
+        ret = json.loads(response.content)  
+        expected = {
+            u"tags": u"sf,answer,universe", 
+            u"created_datetime": "2011-05-04 09:08:13", 
+            u"question": u"what is answer of universe?", 
+            u"id": 1, 
+            u"user": {
+                u"username": u"test"
+            }, 
+            u"answer_page_link": u"", 
+            u"permlink": u"http://example.com/k/1.html", 
+            u"search_keywords": u"", 
+            u"answer_summary": u"42", 
+            u"answer_page_title": u""
+        }
+        for key in ret.keys():
+            if key not in [u'created_datetime']:
+                self.assertEqual(ret[key], expected[key])
+
+        data['include_answer_page'] = 'checked'
+        data['search_keywords'] = 'universe answer\nthe answer of universe'
+        response = client.post('/api/v1/knowledge/', data)
+        self.assertEqual(response.status_code, 200)
+        
+        ret = json.loads(response.content)  
+        expected = {
+            u"tags": u"sf,answer,universe", 
+            u"created_datetime": u"2011-05-04 09:15:09", 
+            u"question": u"what is answer of universe?", 
+            u"id": 2, 
+            u"user": {
+                u"username": u"test"
+            }, 
+            u"answer_page_link": u"http://42.com/42.html", 
+            u"permlink": u"http://example.com/k/2.html", 
+            u"search_keywords": u"universe answer\nthe answer of universe", 
+            u"answer_summary": u"42", 
+            u"answer_page_title": u"what is answer of universe?"
+        }
+        for key in ret.keys():
+            if key not in [u'created_datetime']:
+                self.assertEqual(ret[key], expected[key])
+        print response
 
 
 class UserAPITest(TestCase):

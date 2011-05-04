@@ -47,6 +47,7 @@ class KnowledgeHandler(BaseHandler):
     allowed_methods = ('POST',)
     model = Knowledge
     fields = ('id', 'question',
+              'search_keywords',
               'answer_summary','answer_page_title', 'answer_page_link',
               'tags', 'created_datetime',
               'permlink',
@@ -60,11 +61,15 @@ class KnowledgeHandler(BaseHandler):
         if not hasattr(request, "data"):
             request.data = request.POST
         attrs = self.flatten_dict(request.data)
+        if not attrs.get('include_answer_page', None):
+            del attrs['answer_page_title']
+            del attrs['answer_page_link']
         kn = Knowledge(question = attrs['question'], 
-                        answer_summary = attrs['answer_summary'],
-                        answer_page_title = attrs['answer_page_title'],
-                        answer_page_link = attrs['answer_page_link'],
-                        tags = attrs['tags'],
+                        search_keywords = attrs.get('search_keywords', ''),
+                        answer_summary = attrs.get('answer_summary', ''),
+                        answer_page_title = attrs.get('answer_page_title', ''),
+                        answer_page_link = attrs.get('answer_page_link', ''),
+                        tags = attrs.get('tags', ''),
                         user=request.user)
         kn.save()
         return kn
