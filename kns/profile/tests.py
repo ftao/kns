@@ -5,19 +5,22 @@ unittest). These will both pass when you run "manage.py test".
 Replace these with more appropriate tests for your application.
 """
 
-from django.test import TestCase
+from django.test import TestCase,Client
+from django.contrib.auth.models import User
+import urllib
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
+class UserTest(TestCase):
+
+    def setUp(self):
+        self.user = User.objects.create(username = 'test', password = 'pass')
+
+    def test_user(self):
         """
-        Tests that 1 + 1 always equals 2.
         """
-        self.failUnlessEqual(1 + 1, 2)
+        client = Client()
 
-__test__ = {"doctest": """
-Another way to test that 1 + 1 is equal to 2.
+        response = client.get('/user/%s.html' %urllib.quote(self.user.username))
+        self.assertEqual(response.status_code, 200)
+        print response
 
->>> 1 + 1 == 2
-True
-"""}
 

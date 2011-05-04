@@ -48,7 +48,7 @@ class UserHandler(BaseHandler):
     def permlink(cls, user):
         user_path = user.get_absolute_url()
         try:
-            user_path = reverse('user_detail', kwargs={'object_id' : user.id})
+            user_path = reverse('user_detail', kwargs={'slug' : user.username})
         except NoReverseMatch:
             pass
         return  u'http://%s%s' %(Site.objects.get_current().domain, user_path)
