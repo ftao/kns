@@ -117,6 +117,7 @@ class UserAPITest(TestCase):
             'password' : 'pass',
         }
         response = client.post('/api/v1/user/', data)
+        print response
         self.assertEqual(response.status_code, 200)
         self.assertEqual(json.loads(response.content)['username'], 'test')
         self.assertTrue(json.loads(response.content)['api_token'])

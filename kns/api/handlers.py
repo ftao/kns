@@ -4,6 +4,7 @@ from piston.utils import rc,validate
 from kns.knowledge.models import Knowledge
 from kns.knowledge.forms import KnowledgeForm
 from django.conf import settings
+from django.core.urlresolvers import reverse,NoReverseMatch
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from kns.api.models import APIToken
@@ -13,7 +14,7 @@ from kns.api.forms import SignupForm
 class UserHandler(BaseHandler):
     allowed_methods = ('POST',)
     model = User
-    fields = ('username', 'api_token')
+    fields = ('username', 'api_token', 'permlink')
 
     anonymous = True
 
@@ -42,6 +43,15 @@ class UserHandler(BaseHandler):
     @classmethod
     def api_token(cls, user):
         return APIToken.objects.get(user = user).token
+
+    @classmethod
+    def permlink(cls, user):
+        user_path = user.get_absolute_url()
+        try:
+            user_path = reverse('user_detail', kwargs={'object_id' : user.id})
+        except NoReverseMatch:
+            pass
+        return  u'http://%s%s' %(Site.objects.get_current().domain, user_path)
 
 class APITokenHandler(BaseHandler):
     allowed_methods = ('GET',)
