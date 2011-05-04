@@ -71,8 +71,10 @@ class KnowledgeHandler(BaseHandler):
             request.data = request.POST
         attrs = self.flatten_dict(request.data)
         if not attrs.get('include_answer_page', None):
-            del attrs['answer_page_title']
-            del attrs['answer_page_link']
+            if 'answer_page_title' in attrs:
+                del attrs['answer_page_title']
+            if 'answer_page_link' in attrs:
+                del attrs['answer_page_link']
         kn = Knowledge(question = attrs['question'], 
                         search_keywords = attrs.get('search_keywords', ''),
                         answer_summary = attrs.get('answer_summary', ''),
