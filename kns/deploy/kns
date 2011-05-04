@@ -5,6 +5,8 @@
     Alias /media /opt/app/kns/lib/python2.5/site-packages/django/contrib/admin/media
     Alias /static /opt/app/kns/releases/current/kns/static
 
+    FcgidPassHeader Authorization
+
     <Directory /var/www/kns/>
         Options FollowSymLinks MultiViews ExecCGI
         AllowOverride All

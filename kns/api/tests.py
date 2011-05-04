@@ -141,7 +141,7 @@ class APITokenTest(TestCase):
 
         import base64
         auth_value = base64.b64encode("%s:%s" %('test', 'password'))
-        auth_header = {'HTTP_AUTHORIZATION':'Api ' +  auth_value}
+        auth_header = {'HTTP_AUTHORIZATION':'Basic ' +  auth_value}
 
         response = client.get('/api/v1/apitoken/',  ** auth_header)
         self.assertEqual(response.status_code, 200)
