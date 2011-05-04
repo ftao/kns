@@ -102,7 +102,6 @@ class KnowledgeAPITest(TestCase):
         for key in ret.keys():
             if key not in [u'created_datetime']:
                 self.assertEqual(ret[key], expected[key])
-        print response
 
 
 class UserAPITest(TestCase):
@@ -124,6 +123,30 @@ class UserAPITest(TestCase):
         #make sure we send an verify email
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].subject, 'Confirm email address for example.com')
-        print response
 
 
+class APITokenTest(TestCase):
+
+    def setUp(self):
+        self.user = User.objects.create(username = 'test')
+        self.user.set_password('password')
+        self.user.save()
+
+        self.user2 = User.objects.create(username = 'test2')
+        self.user2.set_password('password2')
+        self.user2.save()
+
+    def testNewUser(self):
+        client = Client()
+
+        import base64
+        auth_value = base64.b64encode("%s:%s" %('test', 'password'))
+        auth_header = {'HTTP_AUTHORIZATION':'Basic ' +  auth_value}
+
+        response = client.get('/api/v1/apitoken/',  ** auth_header)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('token' in json.loads(response.content))
+        self.assertTrue('user' in json.loads(response.content))
+
+
+    

@@ -43,6 +43,15 @@ class UserHandler(BaseHandler):
     def api_token(cls, user):
         return APIToken.objects.get(user = user).token
 
+class APITokenHandler(BaseHandler):
+    allowed_methods = ('GET',)
+    model = APIToken
+    fields = ('token', ('user', ('username',)))
+
+    def read(self, request):
+        return APIToken.objects.get(user = request.user)
+
+
 class KnowledgeHandler(BaseHandler):
     allowed_methods = ('POST',)
     model = Knowledge
