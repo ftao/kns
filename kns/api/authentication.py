@@ -2,6 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth import authenticate
 from kns.api.models import APIToken
+from piston.authentication import HttpBasicAuthentication
 
 class APITokenAuthentication(object):
     """
@@ -39,3 +40,11 @@ class APITokenAuthentication(object):
     def __repr__(self):
         return u'<APIToken Authoriaztion>' 
 
+
+class MyHttpBasicAuthentication(HttpBasicAuthentication):
+
+    def challenge(self):
+        resp = HttpResponse("Authorization Required")
+        resp['WWW-Authenticate'] = 'API Username Passwrod' 
+        resp.status_code = 401
+        return resp

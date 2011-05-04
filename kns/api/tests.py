@@ -148,5 +148,4 @@ class APITokenTest(TestCase):
         self.assertTrue('token' in json.loads(response.content))
         self.assertTrue('user' in json.loads(response.content))
 
-
     
