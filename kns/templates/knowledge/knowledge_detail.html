@@ -7,7 +7,7 @@
 
 {% block content %}
 <div class="container">
-  <div class="column span-18"> 
+  <div class="column"> 
     <h1 class="k-question">{{ knowledge.question }}</h1>
 
     {% if knowledge.answer_summary %}
@@ -57,9 +57,11 @@
     </div> 
 
   </div> 
+  <!--
   <div class="column last"> 
     <div class="contents"> 
     </div> 
   </div> 
+  -->
 </div>
 {% endblock %}
