@@ -5,30 +5,41 @@
 {% block title %} {{ knowledge.question }} {% endblock %}
 
 {% block content %}
-<div class="column span-18"> 
-  <h1 class="k-question">{{ knowledge.question }}</h1>
-  {% if knowledge.answer_summary %}
-  <div class="k-answer-summary">
-    <h2>{% trans "Answer Summary" %}:</h2>
-    <p>
-    {{ knowledge.answer_summary }}
-    </p>
-  </div>
-  {% endif %}
-  <div class="k-answer-link">
-    <h2>{% trans "Useful Link" %}:<h2>
-    <p>
-      <a href="{{ knowledge.answer_page_link}}">{{ knowledge.answer_page_title}}</a>
-    </p>
-  </div>
-  <div class="k-tags">
-    <h2>{% trans "Tags" %}:<h2>
-    <div>{{ knowledge.tags }}</div>
-  </div>
-</div> 
-<div class="column last"> 
-  <div class="contents"> 
-    <div class="profile group"> 
+<div class="container">
+  <div class="column span-18"> 
+    <h1 class="k-question">{{ knowledge.question }}</h1>
+
+    {% if knowledge.answer_summary %}
+    <div class="k-answer-summary">
+      <p>
+      {{ knowledge.answer_summary }}
+      </p>
+    </div>
+    {% endif %}
+
+    {% if knowledge.answer_page_link %}
+    <div class="k-answer-link k-section">
+      <label>{% trans "Useful Link" %}:</label>
+      <a target="_blank" href="{{ knowledge.answer_page_link}}">{{ knowledge.answer_page_title}}</a>
+    </div>
+    {% endif %}
+
+    {% if knowledge.search_keywords %}
+    <div class="k-search-keywords k-section">
+      <label>{% trans "Related Search Keywords:" %}:</label>
+      <span>{{knowledge.search_keywords}}</span>
+    </div>
+    {% endif %}
+
+    <div class="k-tags k-section">
+      <div>
+        {% for tag in knowledge.taglist %}
+          <span class="tag">{{ tag }}</span>  
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="k-author"> 
       <!--
       <div class="gravatar">
           <img src="{% gravatar_for_user knowledge.user %}"/>
@@ -36,11 +47,18 @@
       -->
       <div class="text"> 
         {% with knowledge.user.username as username %}
-          {% url user_detail object_id=knowledge.user.pk as user_link %}
-          {% blocktrans %}This knowledge is created by <a href="{{user_link}}">{{username}}</a>{% endblocktrans %}
+          {% with knowledge.user.username|urlencode as username_e %}
+          {% url user_detail slug=username_e as user_link %}
+          {% blocktrans %}This entry is created by <a href="{{user_link}}">{{username}}</a> via <a href="chrome-url" class="app-link">QuickKnowHow</a>.{% endblocktrans %}
+          {% endwith %}
         {% endwith %}
       </div> 
     </div> 
+
   </div> 
-</div> 
+  <div class="column last"> 
+    <div class="contents"> 
+    </div> 
+  </div> 
+</div>
 {% endblock %}

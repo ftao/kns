@@ -133,6 +133,8 @@ if SentryHandler not in map(lambda x: x.__class__, logger.handlers):
 
 INTERNAL_IPS = ('127.0.0.1', '192.168.254.100')
 
+GRAVATAR_DEFAULT_IMAGE = 'mm'
+
 try:
     from local_settings import *
 except ImportError,e:

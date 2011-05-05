@@ -21,5 +21,10 @@ class Knowledge(models.Model):
             'object_id': self.id
         })
 
+    def _get_taglist(self):
+        return [x for x in self.tags.split(u',') if x ]
+        
+    taglist = property(_get_taglist)
+        
     class Meta:
         ordering = ['-created_datetime']

@@ -1,15 +1,55 @@
 body {
-    width:80%;
-    margin:50px auto 0 auto;
+    margin:0 auto 0 auto;
 }
-#head {
-    
+#header {
+    padding-top: 18px;
+    padding-bottom:5px;
+}
+#header .sitename {
+    font-size:24px;
+    font-weight:bold;
+    font-family:Helvetica;
+    width:180px;
+}
+#header .sitelogan {
+    font-size:14px;
+    padding-top:8px;
 }
 
 #wrap {
+    padding-top:10px;
+    min-height:400px;
 }
 
 #wrap h1 {
     border-bottom:1px solid gray;
 }
+#footer {
+    padding-top:10px;
+    font-size:12px;
+    text-align:center;
+}
 
+.tag {
+    -moz-border-radius: 3px 3px 3px 3px;
+    background: none repeat scroll 0 0 #DFEAF4;
+    color: #19558D;
+    display: inline-block;
+    height: 18px;
+    line-height: 18px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    padding: 2px 5px;
+    text-decoration: none;
+}
+
+.k-answer-summary p {
+    font-size:14px;
+}
+
+.k-author {
+    font-size:14px;
+}
+
+.app-link {
+}
