@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load gravatar %}
+{% load plaintext2html %}
 
 {% block title %} {{ knowledge.question }} {% endblock %}
 
@@ -12,7 +13,7 @@
     {% if knowledge.answer_summary %}
     <div class="k-answer-summary">
       <p>
-      {{ knowledge.answer_summary }}
+      {{ knowledge.answer_summary|escape|plaintext2html|safe }}
       </p>
     </div>
     {% endif %}
