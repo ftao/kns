@@ -1,5 +1,7 @@
 <VirtualHost *:80>
-    ServerName k.ftao.org
+    ServerName knowhowspot.com
+    ServerAlias www.knowhowspot.com
+    ServerAlias k.ftao.org
     DocumentRoot /var/www/kns
 
     Alias /media /opt/app/kns/lib/python2.5/site-packages/django/contrib/admin/media
@@ -14,6 +16,10 @@
         allow from all
 
         RewriteEngine On
+
+        RewriteCond %{HTTP_HOST} ^www.knowhowspot.com$ [NC]
+        RewriteRule ^(.*)$ http://knowhowspot.com/$1 [L,R=301]
+
         RewriteCond %{REQUEST_FILENAME} !-f
         RewriteRule ^(.*)$ kns.fcgi/$1 [QSA,L]
     </Directory>
