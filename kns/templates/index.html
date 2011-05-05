@@ -1,8 +1,27 @@
 {% extends "base.html" %}
+{% block header %}{% endblock %}
 {% block content %}
 
-<h1>KSMS: Store, manage and share you knowledge.</h1>
+<div class="container" id="home">
 
-<a href="">Install Chrome Extension</a>
+  <div class="span-14">
+    <h1>KnowHowSpot</h1>
+    <div class="tab">
+      <div class="tab-content">
+          <p>
+             <span>KnowHowSpot</span> is a better way to save, manage and share your knowledge .
+          </p>
+          <p>
+             Input the question and answer right in your browser, save and share it within a single click . 
+          </p>
+          <p>
+          <a href="chrome-store-url"><img src="{{MEDIA_URL}}img/chromestore.png"/></a>
+          </p>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 {% endblock %}
+

@@ -9,14 +9,17 @@
   <link rel="stylesheet" href="{{MEDIA_URL}}css/main.css" type="text/css" media="screen" charset="utf-8"/>    
 </head> 
 <body> 
+  {% block header %}
   <div id="header" class="container"> 
       <div class="sitename column span-6"><a id="topsitelink" href="/">KnowHowSpot</a></div>
       <div class="sitelogan column span-10 last">{% trans "Save,Manage and Share your knowledge" %}</div>
   </div> 
+  {% endblock %}
   <div id="wrap"> 
   {% block content %}
   {% endblock %}
   </div> <!-- end of wrap -->
+  {% block footer %}
   <div id="footer" class="container">
     <!--
     <div class="foot-link">
@@ -24,5 +27,6 @@
     -->
     <div class="copyright">Copyright 2011, knowhowspot.com (contact@knowhowspot.com)</div>
   </div>
+  {% endblock %}
 </body> 
 </html>
