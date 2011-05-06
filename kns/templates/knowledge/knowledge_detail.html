@@ -50,7 +50,7 @@
         {% with knowledge.user.username as username %}
           {% with knowledge.user.username|urlencode as username_e %}
           {% url user_detail slug=username_e as user_link %}
-          {% blocktrans %}This entry is created by <a href="{{user_link}}">{{username}}</a> via <a href="chrome-url" class="app-link">QuickKnowHow</a>.{% endblocktrans %}
+          {% blocktrans %}This entry is created by <a href="{{user_link}}">{{username}}</a> via <a href="https://github.com/downloads/ftao/pkm-tool/quickknowhow-0.1.crx" class="app-link">Quick Know-How</a>.{% endblocktrans %}
           {% endwith %}
         {% endwith %}
       </div> 
