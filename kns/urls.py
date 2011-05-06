@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     # Example:
     (r'^$', direct_to_template, {'template': 'index.html'}),
     (r'^api/v1/', include('kns.api.urls')),
+    (r'^release/', include('kns.release.urls')),
     (r'^', include('kns.knowledge.urls')),
     (r'^', include('kns.profile.urls')),
 
