@@ -27,3 +27,15 @@ urlpatterns += patterns('',
     (r'^sentry314/', include('sentry.urls')),
 )
 
+from kns.knowledge.urls import knowledge_info
+from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
+
+sitemaps = {
+    'knowledge': GenericSitemap(knowledge_info, priority=0.6),
+}
+
+urlpatterns += patterns('',
+    (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps})
+)
+
+
