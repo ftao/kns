@@ -10,6 +10,9 @@ class UpdateTest(TestCase):
     def setUp(self):
         Release.objects.create(name = 'quick-knowhow', 
             appid = 'gcnjbhfkdigacmabhfnijjjengiojnol',
+            version = '0.0.1', url = 'https://github.ocm/ftao/pkm-tool/download/quick-knowhow-0.0.1.crx')
+        Release.objects.create(name = 'quick-knowhow', 
+            appid = 'gcnjbhfkdigacmabhfnijjjengiojnol',
             version = '0.1', url = 'https://github.ocm/ftao/pkm-tool/download/quick-knowhow-0.1.crx')
         
     def test_update(self):
