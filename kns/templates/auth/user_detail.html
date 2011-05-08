@@ -2,6 +2,10 @@
 {% load i18n %}
 {% load gravatar %}
 
+{% block extra_header %}
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{% url user_knowledge_feed username=theuser.username %}" /> 
+{% endblock %}
+
 {% block title %}
   {% with theuser.username as username %}
     {% blocktrans %}User {{ username }}{% endblocktrans %} - knowhowspot.com

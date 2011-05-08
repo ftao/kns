@@ -22,7 +22,7 @@ class UserTest(TestCase):
         client = Client()
         response = client.get('/users/%s/' %urllib.quote(self.user.username))
         self.assertEqual(response.status_code, 200)
-#        print response
+        print response
 
 
     def test_user_feed(self):

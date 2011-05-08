@@ -16,7 +16,7 @@ class UserKnowledgeFeed(Feed):
         return u"%s: %s's knowledge" % (current_site.name, obj.username)
 
     def link(self, obj):
-        return obj.get_absolute_url() + 'feed/'
+        return obj.get_absolute_url()
 
     def description(self, obj):
         return u"Recent knowledge published by %s" % obj.username
