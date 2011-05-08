@@ -3,7 +3,7 @@
 {% load gravatar %}
 
 {% block extra_header %}
-<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{% url user_knowledge_feed username=theuser.username %}" /> 
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://{{site.domain}}{% url user_knowledge_feed username=theuser.username %}" /> 
 {% endblock %}
 
 {% block title %}

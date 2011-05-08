@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import *
 from django.views.generic import list_detail 
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 from kns.profile.feeds import UserKnowledgeFeed
 
 user_info =  {
@@ -12,6 +13,9 @@ user_info_via_username =  {
     'queryset': User.objects.all(),
     'template_object_name' : 'theuser',
     'slug_field' : 'username',
+    'extra_context' : {
+        'site' : Site.objects.get_current(),
+    }
 }
 
 urlpatterns = patterns('',
