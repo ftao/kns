@@ -3,6 +3,7 @@
 {% load gravatar %}
 
 {% block extra_header %}
+<link rel="stylesheet" href="{{MEDIA_URL}}css/gh-buttons.css" type="text/css" media="screen" charset="utf-8"/>    
 <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://{{site.domain}}{% url user_knowledge_feed username=theuser.username %}" /> 
 {% endblock %}
 
@@ -23,7 +24,7 @@
   </div>
 
   <div class="user_knowledge column last">
-    <h3>Knowledge</h3>
+    <h3>Knowledge <a href="{% url user_knowledge_feed username=theuser.username %}" class="button icon rss">Subscribe to RSS feed</a></h3>
     <ul>
       {% for knowledge in theuser.knowledge_set.all %}
           <li>
