@@ -1,0 +1,26 @@
+[
+  {
+    "pk": 1, 
+    "model": "release.release", 
+    "fields": {
+      "name": "quickknowhow", 
+      "changelog": "v0.1 ", 
+      "url": "https://github.com/downloads/ftao/pkm-tool/quickknowhow-0.1.crx", 
+      "released_time": "2011-05-06 11:46:09", 
+      "version": "0.1", 
+      "appid": "aehdmoifdlfhbbfmcpllemailldnhmem"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "release.release", 
+    "fields": {
+      "name": "quickknowhow", 
+      "changelog": "1. add draft auto save ", 
+      "url": "https://github.com/downloads/ftao/pkm-tool/quickknowhow-0.1.1.crx", 
+      "released_time": "2011-05-07 23:16:29", 
+      "version": "0.1.1", 
+      "appid": "aehdmoifdlfhbbfmcpllemailldnhmem"
+    }
+  }
+]

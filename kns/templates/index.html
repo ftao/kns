@@ -16,7 +16,10 @@
              Input the question and answer right in your browser, save and share it within a single click . 
           </p>
           <p class="large">
-          Install <a href="https://github.com/downloads/ftao/pkm-tool/quickknowhow-0.1.crx">Quick Know-How</a> Chrome Extension Now!
+          {% load release %}
+          {% with  'quickknowhow'|release_url  as qkh_release_url %}
+          Install <a href="{{ qkh_release_url }}">Quick Know-How</a> Chrome Extension Now!
+          {% endwith %}
           </p>
       </div>
     </div>

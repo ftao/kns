@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from kns.knowledge.models import Knowledge
 
 class KnowledgeTest(TestCase):
+    fixtures = ['test_release.json']
 
     def setUp(self):
         self.user = User.objects.create(username = 'test', password = 'pass')
@@ -29,6 +30,8 @@ class KnowledgeTest(TestCase):
 
  
 class HomeTest(TestCase):
+
+    fixtures = ['test_release.json']
 
     def test_home(self):
         """
