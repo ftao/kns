@@ -119,7 +119,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
-DEFAULT_FROM_EMAIL = 'k-service@ftao.org'
+DEFAULT_FROM_EMAIL = 'service@knowhowspot.com'
 
 EMAIL_CONFIRMATION_DAYS = 5
 
