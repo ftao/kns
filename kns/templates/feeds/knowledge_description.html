@@ -1,0 +1,36 @@
+{% load i18n %}
+{% load plaintext2html %}
+{% with obj as knowledge %}
+{% if knowledge.answer_summary %}
+<div class="k-answer-summary">
+  <p>
+  {{ knowledge.answer_summary|escape|plaintext2html|safe }}
+  </p>
+</div>
+{% endif %}
+
+{% if knowledge.answer_page_link %}
+<div class="k-answer-link k-section">
+  <label>{% trans "Useful Link" %}:</label>
+  <a target="_blank" href="{{ knowledge.answer_page_link}}">{{ knowledge.answer_page_title}}</a>
+</div>
+{% endif %}
+
+{% if knowledge.search_keywords %}
+<div class="k-search-keywords k-section">
+  <label>{% trans "Related Search Keywords:" %}:</label>
+  <span>{{knowledge.search_keywords}}</span>
+</div>
+{% endif %}
+
+{% if knowledge.taglist %}
+<div class="k-tags k-section">
+  <label>{% trans "Tags:" %}:</label>
+  <div>
+    {% for tag in knowledge.taglist %}
+      <span class="tag">{{ tag }}</span>  
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+{% endwith %}
